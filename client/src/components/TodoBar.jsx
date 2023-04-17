@@ -4,6 +4,8 @@ import TodoList from './TodoList';
 const TodoBar = () => {
     const [list, setList] = useState([])
     const [input, setInput] = useState('')
+
+
     const handleSubmit = (event) => {
         event.preventDefault()
         if(input){
@@ -23,7 +25,7 @@ const TodoBar = () => {
                     <button type='submit' className='bg-blue-800 text-white px-4 py-1 rounded w-20'>Add</button>
                 </div>
             </form>
-            <TodoList list={list}/>
+            <TodoList list={list} setList={setList}/>
         </div>
     );
 }

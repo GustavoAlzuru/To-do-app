@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 
-const TodoList = ({ list }) => {
-
+const TodoList = ({ list, setList }) => {
+    const remove = (item) => {
+        const listRemove = list.filter((list, index) => index !== item)
+        setList(listRemove)
+    }
     return (
         <div className=' mt-6 w-full h-fit border-black'>
             {list.length ? 
                 (
 
-                    list.map(list => (
-                        <div className='border-b border-black flex items-center pt-2 pb-2 lg:flex-row flex-col'>
+                    list.map((list, index) => (
+                        <div className='border-b border-black flex items-center pt-2 pb-2 lg:flex-row flex-col' key={index}>
                             <p className=' text-base text-center lg:w-2/5'>{list.todo}</p>
                             <div className='flex gap-2 lg:flex-row flex-col lg:w-full justify-center'>
                                 <div className='flex gap-2 items-center '>
@@ -22,7 +25,7 @@ const TodoList = ({ list }) => {
                                     </div>
                                 </div>
                                 <div className='flex items-center justify-center'>
-                                    <button className='text-base border  text-white bg-red-700 rounded pl-2 pr-2 h-fit'>Remove</button>
+                                    <button className='text-base border  text-white bg-red-700 rounded pl-2 pr-2 h-fit' onClick={ () => remove(index)}>Remove</button>
                                 </div>
                             </div>
                         </div>
