@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const TodoList = ({ list, setList }) => {
+const TodoList = () => {
+    const [list, setList] = useState([])
+    useEffect(() => {
+        const getTodos = async () => {
+            const data = await fetch('http://localhost:3000/todos')
+            const res = await data.json()
+            console.log(res)
+            setList(res)
+        }
+        getTodos()
+    }, [])
     const remove = (item) => {
         const listRemove = list.filter((list, index) => index !== item)
         setList(listRemove)

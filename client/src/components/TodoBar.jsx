@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import TodoList from './TodoList';
 
 const TodoBar = () => {
-    const [list, setList] = useState([])
+
     const [input, setInput] = useState('')
 
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if(input){
-            setList([...list, {todo: input, completed: false, inProgress: false}])
-            setInput('')
-        }
+        // if(input){
+        //     setList([...list, {todo: input, completed: false, inProgress: false}])
+        //     setInput('')
+        // }
     }
     const handleChange = (e) => {
-        const newValue = e.target.value
-        setInput(newValue)
+        // const newValue = e.target.value
+        // setInput(newValue)
     }
     return (
         <div className='w-full justify-center'>
@@ -25,10 +25,9 @@ const TodoBar = () => {
                     <button type='submit' className='bg-blue-800 text-white px-4 py-1 rounded w-20'>Add</button>
                 </div>
             </form>
-            <TodoList list={list} setList={setList}/>
+            <TodoList />
         </div>
     );
 }
 
 export default TodoBar;
-// context.setTasks([...context.tasks, {title: value, completed: false}])
