@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import TodoList from './TodoList';
+import { TasksContext } from '../context/TasksContext'
 
 const TodoBar = () => {
-
     const [input, setInput] = useState('')
+    const {tasks, setTasks}= useContext(TasksContext)
 
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        // if(input){
-        //     setList([...list, {todo: input, completed: false, inProgress: false}])
-        //     setInput('')
-        // }
+        if(input){
+            setTasks([...tasks, {todo: input, completed: false, inProgress: false}])
+            setInput('')
+        }
     }
     const handleChange = (e) => {
-        // const newValue = e.target.value
-        // setInput(newValue)
+        const newValue = e.target.value
+        setInput(newValue)
     }
     return (
         <div className='w-full justify-center'>

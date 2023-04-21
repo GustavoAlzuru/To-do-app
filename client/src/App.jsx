@@ -3,16 +3,19 @@ import Navigation from './components/Navigation'
 import { BrowserRouter } from 'react-router-dom'
 import Public from './routes/Public'
 import Auth from './routes/Auth'
+import TasksProvider from './context/TasksContext'
 
 function App() {
-  const isLogin = false
+  const isLogin = true
 
   if(isLogin){
     return (
       <div className='h-screen sm:flex'>
         <BrowserRouter>
-          <Navigation/>
-          <Public/>
+          <TasksProvider>
+            <Navigation/>
+            <Public/>
+          </TasksProvider>
         </BrowserRouter>
       </div>
     )
