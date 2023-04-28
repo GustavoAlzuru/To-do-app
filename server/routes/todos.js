@@ -1,29 +1,10 @@
 var express = require('express');
+const { getTasks, createTask, removeTodo } = require('../controllers/tasksControllers');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  const todos = [
-    {
-    todo: 'Clean dishes',
-    completed: false,
-    inProgress: false,
-    id:1
-    },
-    {
-      todo: 'Organized kitchen',
-      completed: false,
-      inProgress: false,
-      id:1
-    },
-    {
-      todo: 'Prepare meal',
-      completed: false,
-      inProgress: false,
-      id:1
-    }
-  ]
-  res.json(todos)
-});
+router.get('/', getTasks);
+router.post('/', createTask)
+router.delete('/:id', removeTodo)
 
 module.exports = router;

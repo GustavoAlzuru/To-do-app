@@ -1,16 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import TodoList from './TodoList';
-import { TasksContext } from '../context/TasksContext'
+import { sentTodo } from '../services/tasks';
 
 const TodoBar = () => {
     const [input, setInput] = useState('')
-    const {tasks, setTasks}= useContext(TasksContext)
-
 
     const handleSubmit = (event) => {
         event.preventDefault()
         if(input){
-            setTasks([...tasks, {todo: input, completed: false, inProgress: false}])
+            sentTodo(input)
             setInput('')
         }
     }
@@ -18,6 +16,7 @@ const TodoBar = () => {
         const newValue = e.target.value
         setInput(newValue)
     }
+
     return (
         <div className='w-full justify-center'>
             <form onSubmit={handleSubmit} className='flex justify-center mt-10 gap-8 sm:flex-row flex-col'>
