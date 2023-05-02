@@ -27,5 +27,13 @@ module.exports = {
         }catch(error){
             console.log(error)
         }
+    },
+    updateTodo: async function(req, res, next) {
+        try{
+            const update = await tasksModel.updateOne({_id: req.params.id}, req.body)
+            res.json(update)
+        }catch(err){
+            console.log(err)
+        }
     }
 }

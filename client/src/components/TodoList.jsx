@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TasksContext } from '../context/TasksContext';
-import {getTodos, removeTodo} from '../services/tasks';
+import {getTodos, isComplete, removeTodo} from '../services/tasks';
 
 const TodoList = () => {
     const { tasks, setTasks } = useContext(TasksContext)
@@ -10,11 +10,24 @@ const TodoList = () => {
            setTasks(data)
         }
         getData()
-
     }, [])
     const handleRemove = (id) => {
         removeTodo(id)
+        setTasks(tasks.filter((task) => task._id !== id))
     }
+    const handleCompleted = (element) => {
+        setTasks(tasks.map((task) => {
+            if(task._id === element._id){
+                return{...task, completed: !task.completed}
+            }
+            return task
+        }))
+        const newEl = element
+        newEl.completed = !newEl.completed
+        isComplete(element._id, newEl)
+    }
+
+
     return (
         <div className=' mt-6 w-full h-fit border-black'>
             {tasks.length ? 
@@ -27,7 +40,7 @@ const TodoList = () => {
                                 <div className='flex gap-2 items-center '>
                                     <div className='flex gap-2 items-center'>
                                         <label className='text-base'>Completed</label>
-                                        <input type="checkbox"  />
+                                        <input type="checkbox"  onChange={() => handleCompleted(task)} checked={task.completed ? true : false}/>
                                     </div>
                                     <div className='flex gap-2 items-center'>
                                         <label className='text-base'>In Progress</label>

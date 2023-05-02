@@ -15,6 +15,17 @@ export const sentTodo = async (input) => {
             'Content-Type': 'application/json'
         }
     })
+    const response = await data.json()
+    return response
+}
+export const isComplete = async (id, newTask) => {
+    await fetch(`http://localhost:3000/todos/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(newTask),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
 }
 export const removeTodo = async (id) => {
     await fetch(`http://localhost:3000/todos/${id}`, {
